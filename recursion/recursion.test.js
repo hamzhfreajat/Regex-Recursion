@@ -1,8 +1,10 @@
 /* Write a function to do the division operation without using the built-in division*/
 
 function division(number, dividedBy){
-    // Write you logic here.
-    return;
+    if( dividedBy == 0 ) return 0;
+    else if(number - dividedBy == 0) return 1;
+    else if( number< dividedBy) return 0;
+    else return ( 1 + division(number-dividedBy, dividedBy) );
 }
 
 /* Write a function that implement Math.pow(x,n) but using recursion
@@ -12,8 +14,14 @@ pow(2,4) = 16
 
 
 function pow(x,n){
-    // Write you logic here.
-    return;
+    if (n === 0) return 1;
+    if(x === 0) return 1;
+
+    let result = x;
+
+    result = result * pow(x, n - 1)
+
+    return result
 }
 
 /* The Fibonacci Series is a numeric series starting with the integers 0 and 1. In this series,
@@ -26,8 +34,9 @@ Write a function that take n as parameter and return the nth element in the Fibo
 Example: n = 4 ==> 3, n= 0 ==> 0, n = 3 ==> 2 */
 
 function fibonacci(n){
-    // Write you logic here.
-    return;
+    if (n <= 1)
+        return n;
+    return fibonacci(n-1) + fibonacci(n-2);
 }
 
 /* The set [1, 2, 3, ..., n] contains a total of n! unique permutations.
@@ -46,10 +55,23 @@ Example:
 Input: n = 3, k = 3
 Output: "213" */
 
-function permutations(n){
+function permutations(n,k){
     let arr = [];
-    // Write you logic here. 
-    return arr
+    if (n.length === 0) return [];
+    if (n.length === 1) return [n];
+
+    for (let i = 0; i < n.length; i++) {
+        const currentNum = n[i];
+        const remainingNums = n.slice(0, i).concat(n.slice(i +1));
+        const remainingNumsPermuted = permutations(remainingNums);
+        for (let j = 0; j < remainingNumsPermuted.length; j++) {
+            const permutedArray = [currentNum].concat(remainingNumsPermuted[j]);
+
+            arr.push(permutedArray);
+        }
+    }
+    finalResult = arr.map(item => item.toString().replace(',',''));
+    return finalResult;
 };
 
 
@@ -73,16 +95,16 @@ describe("Test pow", () => {
 describe("Test fibonacci", () => {
     test("It should implement fibonacci series logic", () => {
         expect(fibonacci(0)).toStrictEqual(0);
-        expect(pow(1)).toStrictEqual(1);
-        expect(pow(2)).toStrictEqual(1);
-        expect(pow(3)).toStrictEqual(2);
-        expect(pow(4)).toStrictEqual(3);
+        expect(fibonacci(1)).toStrictEqual(1);
+        expect(fibonacci(2)).toStrictEqual(1);
+        expect(fibonacci(3)).toStrictEqual(2);
+        expect(fibonacci(7)).toStrictEqual(13);
     })
 });
 
 describe("Test permutations", () => {
     test("It should return a list of possible combinations", () => {
         expect(permutations([1,2,3],3)).toStrictEqual(["123", "132", "213", "231", "312", "321"]);
-        expect(permutations[1,2,3],0).toStrictEqual([]);
+        expect(permutations([1,2,3],0)).toStrictEqual([]);
     })
 });
