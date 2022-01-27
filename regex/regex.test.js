@@ -6,8 +6,9 @@
 characters (no numbers and symbols) and it should end with capital A else return false */
 
 function capitalA(s){
-    // Add your logic.
-    return;
+    let regex1 = /[\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g
+    let rege2 = /[A$]/g ;
+    return (!regex1.test(s) && rege2.test(s));
 }
 
 
@@ -15,8 +16,8 @@ function capitalA(s){
 which end with io (example@example.io) */
 
 function ioEmail(email){
-    // Add your logic.
-    return;
+    let regex = /^[^\s@.]+@[^\s@]+\.[^\s@]+[^\sgmail]/mg
+    return regex.test(email);
 }
 
 /* You have a text that contain image names with their extention you need to write a function to 
@@ -28,6 +29,11 @@ required extention are jpg, jpeg and png.
 
 function imagesSearcher(text){
     let arr = [];
+    let regex =/([^\s]+)(png|jpe?g)/g;
+    arr = text.match(regex);
+    if (arr == null){
+        return [];
+    }
     // Add your logic.
     return arr
 }
