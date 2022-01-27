@@ -59,7 +59,7 @@ function permutations(n,k){
     let arr = [];
     if (n.length === 0) return [];
     if (n.length === 1) return [n];
-
+    if(k === 0) return [];
     for (let i = 0; i < n.length; i++) {
         const currentNum = n[i];
         const remainingNums = n.slice(0, i).concat(n.slice(i +1));
